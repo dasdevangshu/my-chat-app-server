@@ -44,7 +44,7 @@ app.use((req, res, next) => {
   const hostHeader = req.headers.host ?? null;
   
   // const allowedOrigins = [hostHeader, "http://localhost:3000", "http://localhost:4000"];
-  const allowedOrigins = [hostHeader, process.env.CLIENT_URL];
+  const allowedOrigins = [hostHeader, process.env.CLIENT_URL, process.env.SERVER_URL];
   if (!originHeader || !hostHeader || !verifyRequestOrigin(originHeader, allowedOrigins)) {
     console.log(originHeader, hostHeader)
     console.log('CSRF!')
