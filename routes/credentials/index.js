@@ -62,11 +62,12 @@ credentialsLoginRouter.post('/signup/credentials', async (req, res) => {
     const session = await lucia.createSession(userId, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
     const clientUrl = process.env.CLIENT_URL;
+    console.log('Cred Cookie1', sessionCookie)
     console.log('URL', clientUrl)
     return res
         .status(200)
-        .cookie(sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
-        .json({ message: 'You are signed up.' });
+        .json({ message: 'You are signed up.', cookie: sessionCookie });
+        // .cookie(sessionCookie.serialize())
 });
 
 //LogIn
@@ -110,8 +111,10 @@ credentialsLoginRouter.post('/login/credentials', async (req, res) => {
 
     const sessionCookie = lucia.createSessionCookie(session.id);
 
+    // console.log('Cred Cookie2', sessionCookie)
+
 	res
         .status(200)
-		.cookie(sessionCookie.serialize())
-        .json({ message: 'You are logged in.' });
+        .json({ message: 'You are logged in.', cookie: sessionCookie });
+		// .cookie(sessionCookie.serialize())
 });

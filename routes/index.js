@@ -290,6 +290,6 @@ mainRouter.post("/logout", async (req, res) => {
     const clientUrl = process.env.CLIENT_URL;
 	return res
         .status(200)
-        .cookie(sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
-        .json({ message: 'You are logged out.' });
+        .json({ message: 'You are logged out.', cookie: sessionCookie.value, clientUrl: clientUrl});
+        // .cookie(sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
 });

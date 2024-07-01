@@ -12,7 +12,7 @@ const server = createServer(app);
 app.use(cors({
   origin: process.env.CLIENT_URL,
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Accept", "X-Requested-With", "Origin"],
+  allowedHeaders: ["Content-Type", "Accept", "X-Requested-With", "Origin", "Authorization"],
   credentials: true
 }));
 
@@ -20,7 +20,7 @@ const io = new SocketIOServer(server, {
   cors: {
     origin: process.env.CLIENT_URL,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Accept", "X-Requested-With", "Origin"],
+    allowedHeaders: ["Content-Type", "Accept", "X-Requested-With", "Origin", "Authorization"],
     credentials: true
   },
 })
@@ -54,7 +54,9 @@ app.use((req, res, next) => {
 });
 
 app.use(async (req, res, next) => {
-  const sessionId = lucia.readSessionCookie(req.headers.cookie ?? "");
+  // const sessionId = lucia.readSessionCookie(req.headers.cookie ?? "");
+  // console.log('headers: ', req.headers)
+  const sessionId = req.headers['authorization'] ?? null
   console.log('Session Id:', sessionId)
   if (!sessionId) {
     res.locals.user = null;
