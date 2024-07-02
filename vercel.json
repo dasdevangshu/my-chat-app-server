@@ -7,7 +7,7 @@
     }
   ],
   "headers": [{
-    "source": "/(.*)",
+    "source": "/server.js",
     "headers": [
       {
         "key": "Access-Control-Allow-Credentials",
