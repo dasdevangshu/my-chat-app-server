@@ -14,16 +14,16 @@ credentialsLoginRouter.use(express.json());
 //SignUp
 credentialsLoginRouter.get('/signup/credentials', async (req, res) => {
     if (res.locals.session) {
-        return res.status(200).json({ message: 'You are logged in.', user: res.locals.user });
+        return res.status(200).json({ message: 'you are logged in', user: res.locals.user });
     }
     else {
-        res.status(200).json({ message: 'You are not logged in.', user: null });
+        res.status(200).json({ message: 'you are not logged in', user: null });
     }
 });
 
 credentialsLoginRouter.post('/signup/credentials', async (req, res) => {
     if (res.locals.session) {
-        return res.status(200).json({ message: 'You are logged in.', user: res.locals.user });
+        return res.status(200).json({ message: 'you are logged in', user: res.locals.user });
     }
     const username = req.body.username || null;
     const password = req.body.password || null;
@@ -31,7 +31,7 @@ credentialsLoginRouter.post('/signup/credentials', async (req, res) => {
     //add validation for password
 
     if(username === null || password === null){
-        return res.status(400).json({ message: 'Username or password is missing.'});
+        return res.status(400).json({ message: 'username or password is missing'});
     }
 
     const existingUser = await User.findOne({ username: username }).exec();
@@ -66,23 +66,23 @@ credentialsLoginRouter.post('/signup/credentials', async (req, res) => {
     console.log('URL', clientUrl)
     return res
         .status(200)
-        .json({ message: 'You are signed up.', cookie: sessionCookie });
+        .json({ message: 'you are signed up', cookie: sessionCookie });
         // .cookie(sessionCookie.serialize())
 });
 
 //LogIn
 credentialsLoginRouter.get('/login/credentials', async (req, res) => {
     if (res.locals.session) {
-        return res.status(200).json({ message: 'You are logged in.', user: res.locals.user });
+        return res.status(200).json({ message: 'you are logged in', user: res.locals.user });
     }
     else {
-        res.status(200).json({ message: 'You are logged in.', user: res.locals.user });
+        res.status(200).json({ message: 'you are logged in', user: res.locals.user });
     }
 });
 
 credentialsLoginRouter.post('/login/credentials', async (req, res) => {
     if (res.locals.session) {
-        return res.status(200).json({ message: 'You are logged in.', user: res.locals.user });
+        return res.status(200).json({ message: 'you are logged in', user: res.locals.user });
     }
 
     const username = req.body.username || null;
@@ -91,7 +91,7 @@ credentialsLoginRouter.post('/login/credentials', async (req, res) => {
     const existingUser = await User.findOne({ username: username }).exec();
 
     if (!existingUser) {
-        console.log('invalid username or password.');
+        console.log('invalid username or password');
         return res.status(400).json({ message: 'invalid username or password'});
     }
 
@@ -115,6 +115,6 @@ credentialsLoginRouter.post('/login/credentials', async (req, res) => {
 
 	res
         .status(200)
-        .json({ message: 'You are logged in.', cookie: sessionCookie });
+        .json({ message: 'you are logged in', cookie: sessionCookie });
 		// .cookie(sessionCookie.serialize())
 });
