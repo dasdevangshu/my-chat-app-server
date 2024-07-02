@@ -6,7 +6,6 @@
       "use": "@vercel/node"
     }
   ],
-  "source": "/(.*)",
   "headers": [
     {
       "key": "Access-Control-Allow-Credentials",
