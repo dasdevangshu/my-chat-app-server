@@ -60,7 +60,7 @@ mainRouter.post("/send-message", async (req, res) => {
 });
 
 mainRouter.get("/get-messages", async (req, res) => {
-    const numberOfMessages = 5;
+    const numberOfMessages = process.env.INITIAL_LOAD || 15;
 
     if (!res.locals.session) {
         return res.status(401).json({ message: 'You need log in first.'});
@@ -97,7 +97,7 @@ mainRouter.get("/get-messages", async (req, res) => {
 })
 
 mainRouter.get("/get-more-messages", async (req, res) => {
-    const numberOfMessages = 5;
+    const numberOfMessages = process.env.LOAD_MORE || 10;
 
     if (!res.locals.session) {
         return res.status(401).json({ message: 'You need log in first.'});
