@@ -10,7 +10,7 @@ const app = express();
 const server = createServer(app);
 
 app.use(cors({
-  origin: process.env.CLIENT_URL,
+  origin: [process.env.CLIENT_URL, process.env.EXTRA_URL],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Accept", "X-Requested-With", "Origin", "Authorization"],
   credentials: true
@@ -18,7 +18,7 @@ app.use(cors({
 
 const io = new SocketIOServer(server, {
   cors: {
-    origin: process.env.CLIENT_URL,
+    origin: [process.env.CLIENT_URL, process.env.EXTRA_URL],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Accept", "X-Requested-With", "Origin", "Authorization"],
     credentials: true
@@ -44,7 +44,7 @@ app.use((req, res, next) => {
   const hostHeader = req.headers.host ?? null;
   
   // const allowedOrigins = [hostHeader, "http://localhost:3000", "http://localhost:4000"];
-  const allowedOrigins = [hostHeader, process.env.CLIENT_URL, process.env.SERVER_URL];
+  const allowedOrigins = [hostHeader, process.env.CLIENT_URL, process.env.SERVER_URL, process.env.EXTRA_URL];
   if (!originHeader || !hostHeader || !verifyRequestOrigin(originHeader, allowedOrigins)) {
     console.log(originHeader, hostHeader)
     console.log('CSRF!')

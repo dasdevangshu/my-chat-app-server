@@ -23,6 +23,9 @@ mainRouter.get("/", async (_, res) => {
     }
 });
 
+mainRouter.get("/hi", async (_, res) => {
+    res.status(200).message('Hi!')
+});
 
 
 //MESSAGES
